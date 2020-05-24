@@ -18,6 +18,13 @@ const todo = [
   { title: "Excercise", detail: "Dumbell 40 pounds workout", completed: true },
 ]
 
+const todonext = todo.filter((item) => !item.completed)
+const h2todo = document.createElement("h2")
+h2todo.textContent = `You have ${todonext.length} todos left and ${
+  todo.length - todonext.length
+} todos done.`
+document.querySelector("#todo-summary").append(h2todo)
+
 const search = { textSearch: "" }
 const renderTodo = function (arr, key) {
   document.querySelector("#todo-list").innerHTML = ""
