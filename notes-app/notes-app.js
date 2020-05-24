@@ -16,7 +16,7 @@ const renderNotes = function (arr, key) {
   document.querySelector("#notes-title").innerHTML = ""
   filtered.map((item) => {
     const P = document.createElement("p")
-    P.textContent = item.title
+    P.textContent = item.title + ": " + item.body + " details."
     document.querySelector("#notes-title").appendChild(P)
   })
 }
@@ -27,8 +27,14 @@ document.querySelector("#search-input").addEventListener("input", (e) => {
   renderNotes(notes, filters)
 })
 
-document
-  .querySelector("#clear-notes")
-  .addEventListener("click", (e) =>
-    document.querySelectorAll("#notes-title").forEach((item) => item.remove())
-  )
+document.querySelector("#new-note-form").addEventListener("submit", (e) => {
+  e.preventDefault()
+  notes.push({
+    title: e.target.elements.newNote.value,
+    body: e.target.elements.newNote.value,
+  })
+  e.target.elements.newNote.value = ""
+  renderNotes(notes, filters)
+})
+
+document.querySelector('#filter-by').addEventListener('change', e => console.log(e.target.value))
