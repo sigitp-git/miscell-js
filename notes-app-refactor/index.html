@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+    <h1><a href="/notes-app/index.html">Notes App</a></h1>
+    <input id="search-input" type="text" placeholder="search...">
+    <select id="filter-by">
+        <option value="byEdited">Sort by last edited</option>
+        <option value="byCreated">Sort by recently created</option>
+        <option value="byTitle">Sort by title</option>
+    </select>
+    <div id="notes-title"></div>
+    <form id="new-note-form">
+        <textarea rows="3" cols="70" placeholder="new notes..." name="newNote"></textarea>
+        <br>
+        <button>Submit</button>
+    </form>
+    <script src="notes-functions.js"></script>
+    <script src="notes-app.js"></script>
+</body>
+
+</html>
