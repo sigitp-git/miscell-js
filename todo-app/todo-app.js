@@ -1,22 +1,9 @@
-const todo = [
-  {
-    title: "Order cat food",
-    detail: "Order Purina Wet and Dry Food",
-    completed: true,
-  },
-  {
-    title: "Clean Kitchen",
-    detail: "Clean with cleaning cloth and soap",
-    completed: false,
-  },
-  {
-    title: "Buy Food",
-    detail: "Buy healthy portion of protein",
-    completed: false,
-  },
-  { title: "Do Work", detail: "Enablement for Tech Content", completed: false },
-  { title: "Excercise", detail: "Dumbell 40 pounds workout", completed: true },
-]
+let todo = []
+
+const todoJSON = localStorage.getItem("todo")
+if (todoJSON !== null) {
+  todo = JSON.parse(todoJSON)
+}
 
 // hideCompleted added later
 const search = { textSearch: "", hideCompleted: false }
@@ -38,14 +25,22 @@ const renderTodo = function (arr, key) {
   )
 
   // new filter hideCompleted added
-  filteredTodo = filteredTodo.filter((item) => 
+  filteredTodo = filteredTodo.filter((item) =>
     search.hideCompleted ? !item.completed : true
   )
 
   filteredTodo.map((item) => {
     const P = document.createElement("p")
-    P.textContent =
-      item.title + ": " + item.detail + ". Completed status: " + item.completed
+    if (item.title.length > 0) {
+      P.textContent =
+        item.title +
+        ": " +
+        item.detail +
+        ". Completed status: " +
+        item.completed
+    } else {
+      P.textContent = "Oops, a blank todo here"
+    }
     document.querySelector("#todo-list").appendChild(P)
   })
 }
@@ -64,6 +59,7 @@ document.querySelector("#new-todo-form").addEventListener("submit", (e) => {
     detail: e.target.elements.newTodo.value + " detail.",
     completed: false,
   })
+  localStorage.setItem("todo", JSON.stringify(todo))
   e.target.elements.newTodo.value = ""
   renderTodo(todo, search)
 })
