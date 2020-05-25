@@ -1,5 +1,6 @@
 const getSavedTodos = () => {
   const todoJSON = localStorage.getItem("todo")
+
   if (todoJSON !== null) {
     return JSON.parse(todoJSON)
   } else {
@@ -22,15 +23,6 @@ const generateTodoDOM = (item) => {
   return P
 }
 
-const generateSummaryDOM = (arr) => {
-  const todonext = arr.filter((item) => !item.completed)
-  const h2todo = document.createElement("h2")
-  h2todo.textContent = `You have ${todonext.length} todos left and ${
-    arr.length - todonext.length
-  } todos done.`
-  return h2todo
-}
-
 const renderTodo = function (arr, key) {
   document.querySelector("#todo-summary").innerHTML = ""
   document.querySelector("#todo-summary").append(generateSummaryDOM(arr))
@@ -50,4 +42,13 @@ const renderTodo = function (arr, key) {
   filteredTodo.map((item) => {
     document.querySelector("#todo-list").appendChild(generateTodoDOM(item))
   })
+}
+
+const generateSummaryDOM = (arr) => {
+  const todonext = arr.filter((item) => !item.completed)
+  const h2todo = document.createElement("h2")
+  h2todo.textContent = `You have ${todonext.length} todos left and ${
+    arr.length - todonext.length
+  } todos done.`
+  return h2todo
 }

@@ -8,11 +8,15 @@ const getSavedNotes = () => {
   }
 }
 
-const generateNoteDOM = (arr) => {
+const saveNotes = (arr) => {
+  localStorage.setItem("notes", JSON.stringify(arr))
+}
+
+const generateNoteDOM = (item) => {
   const P = document.createElement("p")
 
-  if (arr.title.length > 0) {
-    P.textContent = arr.title + ": " + arr.body + " details."
+  if (item.title.length > 0) {
+    P.textContent = item.title + ": " + item.body + " details."
   } else {
     P.textContent = "Oops a blank notes here"
   }
@@ -28,11 +32,7 @@ const renderNotes = function (arr, key) {
 
   document.querySelector("#notes-title").innerHTML = ""
   filtered.map((item) => {
-    const P = generateNoteDOM(arr)
+    const P = generateNoteDOM(item)
     document.querySelector("#notes-title").appendChild(P)
   })
-}
-
-const saveNotes = (arr) => {
-  localStorage.setItem("notes", JSON.stringify(arr))
 }
