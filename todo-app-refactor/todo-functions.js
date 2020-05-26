@@ -12,17 +12,38 @@ const saveTodo = (arr) => {
   localStorage.setItem("todo", JSON.stringify(arr))
 }
 
-const generateTodoDOM = (item) => {
+const removeTodo = (arr, id) => {
+  const indexTodo = arr.findIndex((item) => item.id === id)
+  if (indexTodo > -1) {
+    arr.splice(indexTodo, 1)
+  }
+}
+
+const generateTodoDOM = (arr, item) => {
   const D = document.createElement("div")
 
   const C = document.createElement("input")
-  C.setAttribute('type', 'checkbox')
+  C.setAttribute("type", "checkbox")
+  if (item.completed) {
+    C.checked = true
+  }
+  C.addEventListener('change', e => {
+    item.completed = true
+    saveTodo(arr)
+    renderTodo(arr, search)
+  })
   D.appendChild(C)
 
   const S = document.createElement("span")
   if (item.title.length > 0) {
     S.textContent =
-      " " + item.title + ": " + item.detail + ". Completed status: " + item.completed + " "
+      " " +
+      item.title +
+      ": " +
+      item.detail +
+      ". Completed status: " +
+      item.completed +
+      " "
   } else {
     S.textContent = " Oops, a blank todo here "
   }
@@ -31,6 +52,11 @@ const generateTodoDOM = (item) => {
 
   const B = document.createElement("button")
   B.textContent = "x"
+  B.addEventListener("click", (e) => {
+    removeTodo(arr, item.id)
+    saveTodo(arr)
+    renderTodo(arr, search)
+  })
   D.appendChild(B)
 
   return D
@@ -53,7 +79,7 @@ const renderTodo = function (arr, key) {
   )
 
   filteredTodo.map((item) => {
-    document.querySelector("#todo-list").appendChild(generateTodoDOM(item))
+    document.querySelector("#todo-list").appendChild(generateTodoDOM(arr, item))
   })
 }
 

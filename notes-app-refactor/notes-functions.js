@@ -12,11 +12,23 @@ const saveNotes = (arr) => {
   localStorage.setItem("notes", JSON.stringify(arr))
 }
 
-const generateNoteDOM = (item) => {
+const removeNote = (arr, id) => {
+  const indexNote = arr.findIndex((item) => item.id === id)
+  if (indexNote > -1) {
+    arr.splice(indexNote, 1)
+  }
+}
+
+const generateNoteDOM = (arr, item) => {
   const D = document.createElement("div")
 
   const B = document.createElement("button")
   B.textContent = "x"
+  B.addEventListener("click", (e) => {
+    removeNote(arr, item.id)
+    saveNotes(arr)
+    renderNotes(arr, filters)
+  })
 
   D.appendChild(B)
 
@@ -41,7 +53,7 @@ const renderNotes = function (arr, key) {
 
   document.querySelector("#notes-title").innerHTML = ""
   filtered.map((item) => {
-    const D = generateNoteDOM(item)
+    const D = generateNoteDOM(arr, item)
     document.querySelector("#notes-title").appendChild(D)
   })
 }

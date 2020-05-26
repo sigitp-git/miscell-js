@@ -1,4 +1,4 @@
-const todo = getSavedTodos()
+let todo = getSavedTodos()
 
 // hideCompleted added later
 const search = { textSearch: "", hideCompleted: false }
@@ -13,6 +13,7 @@ document.querySelector("#todo-search").addEventListener("input", (e) => {
 document.querySelector("#new-todo-form").addEventListener("submit", (e) => {
   e.preventDefault()
   todo.push({
+    id: uuidv4(), 
     title: e.target.elements.newTodo.value,
     detail: e.target.elements.newTodo.value + " detail.",
     completed: false,
