@@ -19,16 +19,21 @@ const removeTodo = (arr, id) => {
   }
 }
 
+const toggleTodo = (arr, id) => {
+  const T  = arr.find(item => item.id === id)
+  if (T !== undefined) {
+    T.completed = !T.completed
+  }
+}
+
 const generateTodoDOM = (arr, item) => {
   const D = document.createElement("div")
 
   const C = document.createElement("input")
   C.setAttribute("type", "checkbox")
-  if (item.completed) {
-    C.checked = true
-  }
-  C.addEventListener('change', e => {
-    item.completed = true
+  C.checked = item.completed
+  C.addEventListener("change", (e) => {
+    toggleTodo(arr, item.id)
     saveTodo(arr)
     renderTodo(arr, search)
   })
