@@ -15,11 +15,17 @@ const saveNotes = (arr) => {
 const generateNoteDOM = (item) => {
   const P = document.createElement("p")
 
+  const button = document.createElement('button')
+  button.textContent = 'x'
+
   if (item.title.length > 0) {
     P.textContent = item.title + ": " + item.body + " details."
   } else {
     P.textContent = "Oops a blank notes here"
   }
+
+  P.appendChild(button)
+
   return P
 }
 
