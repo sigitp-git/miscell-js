@@ -13,14 +13,27 @@ const saveTodo = (arr) => {
 }
 
 const generateTodoDOM = (item) => {
-  const P = document.createElement("p")
+  const D = document.createElement("div")
+
+  const C = document.createElement("input")
+  C.setAttribute('type', 'checkbox')
+  D.appendChild(C)
+
+  const S = document.createElement("span")
   if (item.title.length > 0) {
-    P.textContent =
-      item.title + ": " + item.detail + ". Completed status: " + item.completed
+    S.textContent =
+      " " + item.title + ": " + item.detail + ". Completed status: " + item.completed + " "
   } else {
-    P.textContent = "Oops, a blank todo here"
+    S.textContent = " Oops, a blank todo here "
   }
-  return P
+
+  D.appendChild(S)
+
+  const B = document.createElement("button")
+  B.textContent = "x"
+  D.appendChild(B)
+
+  return D
 }
 
 const renderTodo = function (arr, key) {

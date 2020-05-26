@@ -13,20 +13,23 @@ const saveNotes = (arr) => {
 }
 
 const generateNoteDOM = (item) => {
-  const P = document.createElement("p")
+  const D = document.createElement("div")
 
-  const button = document.createElement('button')
-  button.textContent = 'x'
+  const B = document.createElement("button")
+  B.textContent = "x"
 
+  D.appendChild(B)
+
+  const S = document.createElement("span")
   if (item.title.length > 0) {
-    P.textContent = item.title + ": " + item.body + " details."
+    S.textContent = " " + item.title + ": " + item.body + " details. "
   } else {
-    P.textContent = "Oops a blank notes here"
+    S.textContent = " Oops a blank notes here "
   }
 
-  P.appendChild(button)
+  D.appendChild(S)
 
-  return P
+  return D
 }
 
 const renderNotes = function (arr, key) {
@@ -38,7 +41,7 @@ const renderNotes = function (arr, key) {
 
   document.querySelector("#notes-title").innerHTML = ""
   filtered.map((item) => {
-    const P = generateNoteDOM(item)
-    document.querySelector("#notes-title").appendChild(P)
+    const D = generateNoteDOM(item)
+    document.querySelector("#notes-title").appendChild(D)
   })
 }
