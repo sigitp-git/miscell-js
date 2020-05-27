@@ -10,15 +10,17 @@ document.querySelector("#search-input").addEventListener("input", (e) => {
 })
 
 document.querySelector("#new-note-form").addEventListener("submit", (e) => {
+  const uuid = uuidv4()
   e.preventDefault()
   notes.push({
-    id: uuidv4(),
+    id: uuid,
     title: e.target.elements.newNote.value,
     body: e.target.elements.newNote.value,
   })
   saveNotes(notes)
   e.target.elements.newNote.value = ""
-  renderNotes(notes, filters)
+  //renderNotes(notes, filters)
+  location.assign(`./edit.html#${uuid}`)
 })
 
 document

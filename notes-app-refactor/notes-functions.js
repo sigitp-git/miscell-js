@@ -32,14 +32,15 @@ const generateNoteDOM = (arr, item) => {
 
   D.appendChild(B)
 
-  const S = document.createElement("span")
+  const A = document.createElement("a")
   if (item.title.length > 0) {
-    S.textContent = " " + item.title + ": " + item.body + " details. "
+    A.textContent = " " + item.title + ": " + item.body + " details. "
   } else {
-    S.textContent = " Oops a blank notes here "
+    A.textContent = " Oops a blank notes here "
   }
 
-  D.appendChild(S)
+  A.setAttribute("href", `edit.html#${item.id}`)
+  D.appendChild(A)
 
   return D
 }
