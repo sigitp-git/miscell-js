@@ -1,4 +1,4 @@
-const notes = getSavedNotes()
+let notes = getSavedNotes()
 
 const filters = { searchText: "" }
 
@@ -27,8 +27,8 @@ document.querySelector("#new-note-button").addEventListener("click", (e) => {
   const uuid = uuidv4()
   notes.push({
     id: uuid,
-    title: 'edit title...',
-    body: 'edit body'
+    title: "",
+    body: "",
   })
   saveNotes(notes)
   location.assign(`./edit.html#${uuid}`)
@@ -37,3 +37,10 @@ document.querySelector("#new-note-button").addEventListener("click", (e) => {
 document
   .querySelector("#filter-by")
   .addEventListener("change", (e) => console.log(e.target.value))
+
+window.addEventListener("storage", (e) => {
+  if (e.key === "notes") {
+    notes = JSON.parse(e.newValue)
+  }
+  renderNotes(notes, filters)
+})
