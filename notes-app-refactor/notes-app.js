@@ -44,3 +44,7 @@ window.addEventListener("storage", (e) => {
   }
   renderNotes(notes, filters)
 })
+
+// // momentjs library
+// const birthday = moment('1984-07-01')
+// console.log(birthday.format('MMM D, YYYY'))
