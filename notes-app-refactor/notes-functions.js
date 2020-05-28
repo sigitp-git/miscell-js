@@ -36,7 +36,7 @@ const generateNoteDOM = (arr, item) => {
   if (item.title.length > 0) {
     A.textContent = " " + item.title + ": " + item.body + " details. "
   } else {
-    A.textContent = " Oops a blank notes here "
+    A.textContent = " No Title "
   }
 
   A.setAttribute("href", `edit.html#${item.id}`)

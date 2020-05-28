@@ -9,17 +9,28 @@ document.querySelector("#search-input").addEventListener("input", (e) => {
   renderNotes(notes, filters)
 })
 
-document.querySelector("#new-note-form").addEventListener("submit", (e) => {
+// document.querySelector("#new-note-form").addEventListener("submit", (e) => {
+//   const uuid = uuidv4()
+//   e.preventDefault()
+//   notes.push({
+//     id: uuid,
+//     title: e.target.elements.newNote.value,
+//     body: e.target.elements.newNote.value,
+//   })
+//   saveNotes(notes)
+//   e.target.elements.newNote.value = ""
+//   //renderNotes(notes, filters)
+//   location.assign(`./edit.html#${uuid}`)
+// })
+
+document.querySelector("#new-note-button").addEventListener("click", (e) => {
   const uuid = uuidv4()
-  e.preventDefault()
   notes.push({
     id: uuid,
-    title: e.target.elements.newNote.value,
-    body: e.target.elements.newNote.value,
+    title: 'edit title...',
+    body: 'edit body'
   })
   saveNotes(notes)
-  e.target.elements.newNote.value = ""
-  //renderNotes(notes, filters)
   location.assign(`./edit.html#${uuid}`)
 })
 
