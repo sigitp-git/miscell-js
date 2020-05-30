@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 
 <html>
-    <head></head>
-    <body>
-        <h1><a href="/notes-app-refactor/index.html">Notes App</a></h1>
-        <input name="noteTitle" id="note-title" placeholder="Note title...">
-        <br>
-        <textarea name="noteBody" id="note-body" cols="70" rows="10" placeholder="Note body..."></textarea>
-        <br>
-        <button id="remove-note">Remove Note</button>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js"></script>
-        <script src="notes-functions.js"></script>
-        <script src="notes-edit.js"></script>
-    </body>
+
+<head></head>
+
+<body>
+    <h1><a href="/notes-app-refactor/index.html">Notes App</a></h1>
+    <input name="noteTitle" id="note-title" placeholder="Note title...">
+    <br>
+    <span id="last-edited"></span>
+    <textarea name="noteBody" id="note-body" cols="70" rows="10" placeholder="Note body..."></textarea>
+    <br>
+    <button id="remove-note">Remove Note</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js"></script>
+    <script src="js/notes-functions.js"></script>
+    <script src="js/notes-edit.js"></script>
+</body>
+
 </html>

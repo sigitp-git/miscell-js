@@ -1,8 +1,11 @@
 let notes = getSavedNotes()
-const createdAt = moment().format('X')
-let updatedAt = moment().format('X')
+const createdAt = moment().format("X")
+let updatedAt = moment().format("X")
 
-const filters = { searchText: "" }
+const filters = {
+  searchText: "",
+  sortBy: "byEdited",
+}
 
 renderNotes(notes, filters)
 
@@ -38,9 +41,11 @@ document.querySelector("#new-note-button").addEventListener("click", (e) => {
   location.assign(`./edit.html#${uuid}`)
 })
 
-document
-  .querySelector("#filter-by")
-  .addEventListener("change", (e) => console.log(e.target.value))
+document.querySelector("#filter-by").addEventListener("change", (e) => {
+  filters.sortBy = e.target.value
+  //console.log(e.target.value)
+  renderNotes(notes, filters)
+})
 
 window.addEventListener("storage", (e) => {
   if (e.key === "notes") {
