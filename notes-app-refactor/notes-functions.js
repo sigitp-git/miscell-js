@@ -34,9 +34,9 @@ const generateNoteDOM = (arr, item) => {
 
   const A = document.createElement("a")
   if (item.title.length > 0) {
-    A.textContent = " " + item.title + ": " + item.body + " details. "
+    A.textContent = " " + item.title + ": " + item.body + " details. Created At: " + item.createdAt + ". Updated At: " + item.updatedAt
   } else {
-    A.textContent = " No Title "
+    A.textContent = " No Title " + ": " + item.body + " details. Created At: " + item.createdAt + ". Updated At: " + item.updatedAt
   }
 
   A.setAttribute("href", `edit.html#${item.id}`)

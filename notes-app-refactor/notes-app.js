@@ -1,4 +1,6 @@
 let notes = getSavedNotes()
+const createdAt = moment().format('X')
+let updatedAt = moment().format('X')
 
 const filters = { searchText: "" }
 
@@ -27,6 +29,8 @@ document.querySelector("#new-note-button").addEventListener("click", (e) => {
   const uuid = uuidv4()
   notes.push({
     id: uuid,
+    createdAt: createdAt,
+    updatedAt: updatedAt,
     title: "",
     body: "",
   })
