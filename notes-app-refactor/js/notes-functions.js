@@ -1,5 +1,5 @@
 const getSavedNotes = () => {
-  const notesJSON = localStorage.getItem("notes")
+  const notesJSON = localStorage.getItem('notes')
 
   if (notesJSON !== null) {
     return JSON.parse(notesJSON)
@@ -9,7 +9,7 @@ const getSavedNotes = () => {
 }
 
 const saveNotes = (arr) => {
-  localStorage.setItem("notes", JSON.stringify(arr))
+  localStorage.setItem('notes', JSON.stringify(arr))
 }
 
 const removeNote = (arr, id) => {
@@ -20,11 +20,11 @@ const removeNote = (arr, id) => {
 }
 
 const generateNoteDOM = (arr, item) => {
-  const D = document.createElement("div")
+  const D = document.createElement('div')
 
-  const B = document.createElement("button")
-  B.textContent = "x"
-  B.addEventListener("click", (e) => {
+  const B = document.createElement('button')
+  B.textContent = 'x'
+  B.addEventListener('click', (e) => {
     removeNote(arr, item.id)
     saveNotes(arr)
     renderNotes(arr, filters)
@@ -32,32 +32,32 @@ const generateNoteDOM = (arr, item) => {
 
   D.appendChild(B)
 
-  const A = document.createElement("a")
+  const A = document.createElement('a')
   if (item.title.length > 0) {
     A.innerHTML = item.title
   } else {
-    A.innerHTML = "No Title"
+    A.innerHTML = 'No Title'
   }
 
-  A.setAttribute("href", `edit.html#${item.id}`)
+  A.setAttribute('href', `edit.html#${item.id}`)
   D.appendChild(A)
 
-  const meta = document.createElement("span")
+  const meta = document.createElement('span')
   meta.innerHTML =
-    "<br/>  <small> Body: " +
+    '<br/>  <small> Body: ' +
     item.body +
-    "<br/>Created On: " +
-    moment.unix(item.createdAt).format("MMM D, YYYY") +
-    ". Updated At: " +
+    '<br/>Created On: ' +
+    moment.unix(item.createdAt).format('MMM D, YYYY') +
+    '. Updated At: ' +
     moment.unix(item.updatedAt).fromNow() +
-    " </small> <hr>"
+    ' </small> <hr>'
   D.appendChild(meta)
 
   return D
 }
 
 const sortNotes = (arr, key) => {
-  if (key === "byEdited") {
+  if (key === 'byEdited') {
     return arr.sort((a, b) => {
       if (a.updatedAt > b.updatedAt) {
         return -1
@@ -67,7 +67,7 @@ const sortNotes = (arr, key) => {
         return 0
       }
     })
-  } else if (key === "byCreated") {
+  } else if (key === 'byCreated') {
     return arr.sort((a, b) => {
       if (a.createdAt > b.createdAt) {
         return -1
@@ -77,7 +77,7 @@ const sortNotes = (arr, key) => {
         return 0
       }
     })
-  } else if (key === "byTitle") {
+  } else if (key === 'byTitle') {
     return arr.sort((a, b) => {
       if (a.title.toLowerCase() < b.title.toLowerCase()) {
         return -1
@@ -98,9 +98,9 @@ const renderNotes = function (arr, key) {
       item.body.toLowerCase().includes(key.searchText.toLowerCase())
   )
 
-  document.querySelector("#notes-title").innerHTML = ""
+  document.querySelector('#notes-title').innerHTML = ''
   filtered.map((item) => {
     const D = generateNoteDOM(arr, item)
-    document.querySelector("#notes-title").appendChild(D)
+    document.querySelector('#notes-title').appendChild(D)
   })
 }
