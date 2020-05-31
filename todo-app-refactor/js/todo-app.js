@@ -1,3 +1,5 @@
+'use strict'
+
 let todo = getSavedTodos()
 
 // hideCompleted added later

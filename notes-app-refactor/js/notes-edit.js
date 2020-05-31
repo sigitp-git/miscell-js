@@ -1,3 +1,5 @@
+'use strict'
+
 const noteId = location.hash.substring(1)
 
 let updatedAt = moment().format('X')
@@ -14,7 +16,7 @@ let notes = getSavedNotes()
 
 let note = notes.find((item) => item.id === noteId)
 
-if (note === undefined) {
+if (!note) {
   location.assign('/notes-app-refactor/index.html')
 }
 
@@ -50,7 +52,7 @@ window.addEventListener('storage', (e) => {
 
   let note = notes.find((item) => item.id === noteId)
 
-  if (note === undefined) {
+  if (!note) {
     location.assign('/notes-app-refactor/index.html')
   }
   titleElement.value = note.title

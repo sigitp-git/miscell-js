@@ -1,3 +1,5 @@
+'use strict'
+
 let notes = getSavedNotes()
 const createdAt = moment().format('X')
 let updatedAt = moment().format('X')
