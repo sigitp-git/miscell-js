@@ -2,6 +2,8 @@ const puzzle = document.querySelector('#puzzle')
 const attemptLeft = document.querySelector('#attempt-left')
 const status = document.querySelector('#status')
 
+const game1 = new Hangman('cat', 3)
+
 const updateGame = () => {
   puzzle.innerHTML = '<b>Puzzle: </b>' + game1.getPuzzle()
   attemptLeft.innerHTML = '<b>Attempt Left: </b>' + game1.attemptLeft

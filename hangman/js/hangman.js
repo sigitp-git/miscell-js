@@ -17,16 +17,18 @@ Hangman.prototype.getPuzzle = function () {
 }
 
 Hangman.prototype.makeGuess = function (guess) {
-  guess = guess.toLowerCase()
-  const isUnique = !this.guessedLetters.includes(guess)
-  const isBadGuess = !this.word.includes(guess)
+  if (this.attemptLeft > 0) {
+    guess = guess.toLowerCase()
+    const isUnique = !this.guessedLetters.includes(guess)
+    const isBadGuess = !this.word.includes(guess)
 
-  if (isUnique) {
-    this.guessedLetters.push(guess)
-  }
+    if (isUnique) {
+      this.guessedLetters.push(guess)
+    }
 
-  if (isUnique && isBadGuess) {
-    this.attemptLeft--
+    if (isUnique && isBadGuess) {
+      this.attemptLeft--
+    }
   }
 }
 
@@ -34,8 +36,8 @@ Hangman.prototype.status = function () {
   let status = ''
   const finished = this.word.every((char) => this.guessedLetters.includes(char))
 
-  if (this.attemptLeft <= 0) {
-    status = 'FAILED!'
+  if (this.attemptLeft === 0) {
+    status = `FAILED!, the answer is: "${this.word.join('')}"`
   } else if (finished) {
     status = 'CONGRATS!!'
   } else {
@@ -44,5 +46,3 @@ Hangman.prototype.status = function () {
 
   return status
 }
-
-const game1 = new Hangman('cat', 3)
