@@ -19,18 +19,32 @@
 //   request.send()
 // })
 
-const getCountry = (countryCode) => {
-  // Fetch returns promise, wait for resolve or reject
-  return fetch(`http://restcountries.eu/rest/v2/all`, {})
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json() // return a promise in json
-      } else {
-        throw new Error('Unable to Fetch')
-      }
-    }).then((data) => { // catch promise i json from return response.json()
-      const country = data.find((country) => country.alpha2Code === countryCode)
-      return country.name
-    })
-}
+// // Promise Chaining
+// const getCountry = (countryCode) => {
+//   // Fetch returns promise, wait for resolve or reject
+//   return fetch(`http://restcountries.eu/rest/v2/all`, {})
+//     .then((response) => {
+//       if (response.status === 200) {
+//         return response.json() // return a promise in json
+//       } else {
+//         throw new Error('Unable to Fetch')
+//       }
+//     }).then((data) => { // catch promise i json from return response.json()
+//       const country = data.find((country) => country.alpha2Code === countryCode)
+//       return country.name
+//     })
+// }
 
+// Async Await
+const getCountry = async (countryCode) => {
+  // Fetch returns promise, wait for resolve or reject
+  const response = await fetch(`http://restcountries.eu/rest/v2/all`, {})
+
+  if (response.status === 200) {
+    const data = await response.json()
+    const country = data.find((country) => country.alpha2Code === countryCode)
+    return country.name // return a promise in json
+  } else {
+    throw new Error('Unable to Fetch')
+  }
+}
