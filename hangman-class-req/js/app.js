@@ -2,27 +2,28 @@ const puzzle = document.querySelector('#puzzle')
 const attemptLeft = document.querySelector('#attempt-left')
 const status = document.querySelector('#status')
 
-const game1 = new Hangman('cat', 3)
-
-// returns promize 'data' from request.js getPuzzle()
-getPuzzle('2').then((puzzle) => {
-  console.log(`Fetched: ${puzzle}`)
-}).catch((err) => {
-  console.log(err)
-})
-
-// doing this below won't work since we have HTTP conn time, use above instead
-//console.log(getPuzzle())
+let game
+let randomwords
 
 const updateGame = () => {
-  puzzle.innerHTML = '<b>Puzzle: </b>' + game1.getPuzzle()
-  attemptLeft.innerHTML = '<b>Attempt Left: </b>' + game1.attemptLeft
-  status.innerHTML = '<b>Status: </b>' + game1.status()
+  puzzle.innerHTML = '<b>Puzzle: </b>' + game.getPuzzle()
+  attemptLeft.innerHTML = '<b>Attempt Left: </b>' + game.attemptLeft
+  status.innerHTML = '<b>Status: </b>' + game.status()
 }
 
-updateGame()
+const startGame = async () => {
+  randomwords = await getPuzzle('2')
+  game = new Hangman(randomwords, randomwords.length)
+  // updateGame called after await getPuzzle('2') completed
+  updateGame()
+  console.log(randomwords)
+}
+
+document.querySelector('#reset').addEventListener('click', startGame)
+//startGame() only works after await getPuzzle('2') completed
+startGame()
 
 window.addEventListener('keypress', (e) => {
-  game1.makeGuess(e.key)
+  game.makeGuess(e.key)
   updateGame()
 })
