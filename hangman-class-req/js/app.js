@@ -19,8 +19,11 @@ const startGame = async () => {
   console.log(randomwords)
 }
 
+// startGame here is referencing the callback function, not executing it
 document.querySelector('#reset').addEventListener('click', startGame)
 //startGame() only works after await getPuzzle('2') completed
+
+// startGame() here is executing it as a function
 startGame()
 
 window.addEventListener('keypress', (e) => {
