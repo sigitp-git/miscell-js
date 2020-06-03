@@ -2,24 +2,39 @@
 
 <html>
 
-<head></head>
+<head>
+    <title>To-Do App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/sigit.png">
+</head>
 
 <body>
-    <h1><a href="/todo-app-refactor/index.html">Todo App</a></h1>
-    <div id="todo-summary"></div>
-    <label>
-        Search: <input id="todo-search" type="text" placeholder="search...">
-    </label>
-    <label>
-        <input id="hide-completed" type="checkbox"> Hide Completed
-    </label>
-    <div id="todo-list"></div>
-    <form id="new-todo-form">
-        <textarea rows="3" cols="70" placeholder="new todo..." name="newTodo"></textarea>
-        <br>
-        <button>Submit</button>
-    </form>
-    <button id="clear-todos">Clear Todos</button>
+    <div class="header">
+        <div class="container">
+            <h1 class="header__title"><a href="./index.html">To-Do App</a></h1>
+            <h2 class="header__subtitle">A simple todo app</h2>
+        </div>
+    </div>
+
+    <div class="actions">
+        <div class="actions__container">
+            <input id="todo-search" type="text" placeholder="search..." class="input">
+            <label class="checkbox">
+                <input id="hide-completed" type="checkbox"> Hide Completed
+            </label>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="todo-summary"></div>
+        <div id="todo-list"></div>
+        <form id="new-todo-form">
+            <input placeholder="new todo..." name="newTodo" class="input"></input>
+            <button class="button">Submit</button>
+        </form>
+        <!-- <button id="clear-todos" class="button">Clear Todos</button> -->
+    </div>
+
     <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
     <script src="js/todo-functions.js"></script>
     <script src="js/todo-app.js"></script>

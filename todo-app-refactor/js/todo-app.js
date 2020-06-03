@@ -14,15 +14,19 @@ document.querySelector('#todo-search').addEventListener('input', (e) => {
 
 document.querySelector('#new-todo-form').addEventListener('submit', (e) => {
   e.preventDefault()
-  todo.push({
-    id: uuidv4(),
-    title: e.target.elements.newTodo.value,
-    detail: e.target.elements.newTodo.value + ' detail.',
-    completed: false,
-  })
-  saveTodo(todo)
-  e.target.elements.newTodo.value = ''
-  renderTodo(todo, search)
+  const title = e.target.elements.newTodo.value.trim()
+
+  if (title.length > 0) {
+    todo.push({
+      id: uuidv4(),
+      title, //title: title, ES6
+      detail: '',
+      completed: false,
+    })
+    saveTodo(todo)
+    e.target.elements.newTodo.value = ''
+    renderTodo(todo, search)
+  }
 })
 
 document

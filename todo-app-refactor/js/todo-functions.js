@@ -29,7 +29,8 @@ const toggleTodo = (arr, id) => {
 }
 
 const generateTodoDOM = (arr, item) => {
-  const D = document.createElement('div')
+  const todoEl = document.createElement('label')
+  const containerEl = document.createElement('div')
 
   const C = document.createElement('input')
   C.setAttribute('type', 'checkbox')
@@ -39,7 +40,7 @@ const generateTodoDOM = (arr, item) => {
     saveTodo(arr)
     renderTodo(arr, search)
   })
-  D.appendChild(C)
+  containerEl.appendChild(C)
 
   const S = document.createElement('span')
   if (item.title.length > 0) {
@@ -55,25 +56,31 @@ const generateTodoDOM = (arr, item) => {
     S.textContent = ' Oops, a blank todo here '
   }
 
-  D.appendChild(S)
+  containerEl.appendChild(S)
+
+  todoEl.classList.add('list-item')
+  containerEl.classList.add('list-item__container')
+  todoEl.appendChild(containerEl)
 
   const B = document.createElement('button')
-  B.textContent = 'x'
+  B.textContent = 'remove'
+  B.classList.add('button', 'button--text')
   B.addEventListener('click', (e) => {
     removeTodo(arr, item.id)
     saveTodo(arr)
     renderTodo(arr, search)
   })
-  D.appendChild(B)
+  todoEl.appendChild(B)
 
-  return D
+  return todoEl
 }
 
 const renderTodo = function (arr, key) {
+  const todoList = document.querySelector('#todo-list')
   document.querySelector('#todo-summary').innerHTML = ''
   document.querySelector('#todo-summary').append(generateSummaryDOM(arr))
 
-  document.querySelector('#todo-list').innerHTML = ''
+  todoList.innerHTML = ''
   let filteredTodo = arr.filter(
     (item) =>
       item.title.toLowerCase().includes(key.textSearch.toLowerCase()) ||
@@ -85,16 +92,26 @@ const renderTodo = function (arr, key) {
     search.hideCompleted ? !item.completed : true
   )
 
-  filteredTodo.map((item) => {
-    document.querySelector('#todo-list').appendChild(generateTodoDOM(arr, item))
-  })
+  if (filteredTodo.length > 0) {
+    filteredTodo.map((item) => {
+      todoList.appendChild(generateTodoDOM(arr, item))
+    })
+  } else {
+    const emptyTodo = document.createElement('p')
+    emptyTodo.classList.add('list-item')
+    emptyTodo.textContent = 'No To-Do available'
+    todoList.appendChild(emptyTodo)
+  }
 }
 
 const generateSummaryDOM = (arr) => {
   const todonext = arr.filter((item) => !item.completed)
   const h2todo = document.createElement('h2')
-  h2todo.textContent = `You have ${todonext.length} todos left and ${
+  const pluralnext = todonext.length === 1 || todonext.length === 0 ? '' : 's'
+  const pluraldone = ((arr.length - todonext.length) === 1) || ((arr.length - todonext.length) === 0) ? '' : 's'
+  h2todo.textContent = `You have ${todonext.length} todo${pluralnext} left and ${
     arr.length - todonext.length
-  } todos done.`
+  } todo${pluraldone} done.`
+  h2todo.classList.add('list-title')
   return h2todo
 }

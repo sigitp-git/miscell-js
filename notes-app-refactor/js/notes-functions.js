@@ -22,40 +22,45 @@ const removeNote = (arr, id) => {
 }
 
 const generateNoteDOM = (arr, item) => {
-  const D = document.createElement('div')
+  const noteEl = document.createElement('a')
 
-  const B = document.createElement('button')
-  B.textContent = 'x'
-  B.addEventListener('click', (e) => {
-    removeNote(arr, item.id)
-    saveNotes(arr)
-    renderNotes(arr, filters)
-  })
+  // const B = document.createElement('button')
+  // B.textContent = 'x'
+  // B.classList.add('button--remove')
+  // B.addEventListener('click', (e) => {
+  //   removeNote(arr, item.id)
+  //   saveNotes(arr)
+  //   renderNotes(arr, filters)
+  // })
 
-  D.appendChild(B)
+  // noteEl.appendChild(B)
 
-  const A = document.createElement('a')
+  const textEl = document.createElement('p')
   if (item.title.length > 0) {
-    A.innerHTML = item.title
+    textEl.innerHTML = item.title
   } else {
-    A.innerHTML = 'No Title'
+    textEl.innerHTML = 'No Title'
   }
+  textEl.classList.add('list-item__title')
 
-  A.setAttribute('href', `edit.html#${item.id}`)
-  D.appendChild(A)
+  noteEl.setAttribute('href', `edit.html#${item.id}`)
+  noteEl.appendChild(textEl)
 
-  const meta = document.createElement('span')
+  const meta = document.createElement('p')
   meta.innerHTML =
-    '<br/>  <small> Body: ' +
+    'Body: ' +
     item.body +
-    '<br/>Created On: ' +
+    'Created On: ' +
     moment.unix(item.createdAt).format('MMM D, YYYY') +
     '. Updated At: ' +
     moment.unix(item.updatedAt).fromNow() +
-    ' </small> <hr>'
-  D.appendChild(meta)
+    ''
+  meta.classList.add('list-item__subtitle')
 
-  return D
+  noteEl.appendChild(meta)
+  noteEl.classList.add('list-item')
+
+  return noteEl
 }
 
 const sortNotes = (arr, key) => {
@@ -93,6 +98,7 @@ const sortNotes = (arr, key) => {
 }
 
 const renderNotes = function (arr, key) {
+  const notesEl = document.querySelector('#notes-title')
   notes = sortNotes(notes, filters.sortBy)
   const filtered = arr.filter(
     (item) =>
@@ -100,9 +106,17 @@ const renderNotes = function (arr, key) {
       item.body.toLowerCase().includes(key.searchText.toLowerCase())
   )
 
-  document.querySelector('#notes-title').innerHTML = ''
-  filtered.map((item) => {
-    const D = generateNoteDOM(arr, item)
-    document.querySelector('#notes-title').appendChild(D)
-  })
+  notesEl.innerHTML = ''
+
+  if (filtered.length > 0) {
+    filtered.map((item) => {
+      const D = generateNoteDOM(arr, item)
+      notesEl.appendChild(D)
+    })
+  } else {
+    const P = document.createElement('p')
+    P.textContent = 'No notes'
+    P.classList.add('empty-message')
+    notesEl.appendChild(P)
+  }
 }

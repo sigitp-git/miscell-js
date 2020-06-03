@@ -1,26 +1,42 @@
 <!DOCTYPE html>
+
 <html>
 
-<head></head>
+<head>
+    <title>Notes App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/sigit.png">
+</head>
 
 <body>
-    <h1><a href="/notes-app-refactor/index.html">Notes App</a></h1>
-    <input id="search-input" type="text" placeholder="search...">
-    <select id="filter-by">
-        <option value="byEdited">Sort by last edited</option>
-        <option value="byCreated">Sort by recently created</option>
-        <option value="byTitle">Sort by title</option>
-    </select>
-    <br>
-    <hr>
-    <div id="notes-title"></div>
-    <!-- <form id="new-note-form">
-        <textarea rows="3" cols="70" placeholder="new notes..." name="newNote"></textarea>
-        <br>
-        <button>Create New Note</button>
-    </form> -->
-    <br>
-    <button id="new-note-button">Create New Note</button>
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title"><a href="./index.html">Notes App</a></h1>
+            <h2 class="header__subtitle">A simple note app to track your thoughts!</a></h2>
+        </div>
+    </header>
+
+    <div class="actions">
+        <div class="actions__container">
+            <input id="search-input" type="text" placeholder="search..." class="input">
+            <select id="filter-by" class="dropdown">
+                <option value="byEdited">Sort by last edited</option>
+                <option value="byCreated">Sort by recently created</option>
+                <option value="byTitle">Sort by title</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="notes-title"></div>
+        <!-- <form id="new-note-form">
+            <textarea rows="3" cols="70" placeholder="new notes..." name="newNote"></textarea>
+            <br>
+            <button>Create New Note</button>
+        </form> -->
+        <button id="new-note-button" class="button">Create New Note</button>
+    </div>
+
     <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js"></script>
     <script src="js/notes-functions.js"></script>

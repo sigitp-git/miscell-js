@@ -2,14 +2,20 @@
 
 <html>
 
-<head></head>
+<head>
+    <title>The Hangman Game</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/sigit.png">
+</head>
 
 <body>
-    <h1><a href="./index.html">Hangman Game</a></h1>
-    <div id="puzzle"></div>
-    <div id="attempt-left"></div>
-    <div id="status"></div>
-    <button id="reset">Reset</button>
+    <div>
+        <h1><a href="./index.html">The Hangman Game</a></h1>
+        <div id="puzzle" class="puzzle"></div>
+        <p id="attempt-left"></p>
+        <p id="status"></p>
+        <button id="reset" class="button">Reset</button>
+    </div>
     <script src="js/request.js"></script>
     <script src="js/hangman.js"></script>
     <script src="js/app.js"></script>

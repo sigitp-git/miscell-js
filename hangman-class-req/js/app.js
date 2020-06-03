@@ -6,9 +6,15 @@ let game
 let randomwords
 
 const updateGame = () => {
-  puzzle.innerHTML = '<b>Puzzle: </b>' + game.getPuzzle()
-  attemptLeft.innerHTML = '<b>Attempt Left: </b>' + game.attemptLeft
-  status.innerHTML = '<b>Status: </b>' + game.status()
+  puzzle.innerHTML = ''
+  attemptLeft.innerHTML = 'Attempt Left: ' + game.attemptLeft
+  status.innerHTML = 'Status: ' + game.status()
+  
+  game.getPuzzle().split('').map((letter) => {
+    const letterEl = document.createElement('span')
+    letterEl.textContent = letter
+    puzzle.appendChild(letterEl)
+  })
 }
 
 const startGame = async () => {

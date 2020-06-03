@@ -2,16 +2,36 @@
 
 <html>
 
-<head></head>
+<head>
+    <title>Notes App - Edit</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/sigit.png">
+</head>
 
 <body>
-    <h1><a href="/notes-app-refactor/index.html">Notes App</a></h1>
-    <input name="noteTitle" id="note-title" placeholder="Note title...">
-    <br>
-    <span id="last-edited"></span>
-    <textarea name="noteBody" id="note-body" cols="70" rows="10" placeholder="Note body..."></textarea>
-    <br>
-    <button id="remove-note">Remove Note</button>
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title"><a href="./index.html">Notes App</a></h1>
+            <h2 class="header__subtitle">A simple note app to track your thoughts!</a></h2>
+        </div>
+    </header>
+
+    <div class="actions">
+        <div class="actions__container actions__container--spaced">
+            <p>Edit to notes are auto-saved</p>
+            <span id="last-edited"></span>
+            </select>
+        </div>
+    </div>
+
+    <div class="container">
+        <input name="noteTitle" id="note-title" placeholder="Note title..." class="title-input">
+        <textarea name="noteBody" id="note-body" cols="60" rows="2" placeholder="Note body..."
+            class="body-input"></textarea>
+        <button id="remove-note" class="button button--secondary">Remove Note</button>
+    </div>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js"></script>
     <script src="js/notes-functions.js"></script>
     <script src="js/notes-edit.js"></script>
